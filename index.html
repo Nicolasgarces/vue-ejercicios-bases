@@ -5,13 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vue.js Intro</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> <!--  pegamos el cdn de vue -->
     
 </head>
 <body>
+    <!--creamos un id (puede ser una clase tambien) para  renderizar nuestra aplicacion vue, dandole control absoluto a vue -->
+    <div id="myApp" >
+        <h1>Batman quotes <small>{{newQuote}}</small></h1>
 
-    <div id="myApp" ></div><!--creamos un id (puede ser una clase tambien) para  renderizar nuestra aplicacion vue, dandole control absoluto a vue -->
+        <input 
+            type="text" 
+            v-model="newQuote"
+            v-on:keypress.enter="onAddQuote">
 
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> <!--  pegamos el cdn de vue -->
+        <ul><!--en el for con las llaves {} desestructuramos el array quotes dentro de las llaves elegimos las propiedades a desestructurar
+        para poder listar encerramos la desestructuracion en parentesis () y fuera las llaves agregamos el index-->
+            <li v-for="({quote, author}, index) in quotes">
+                <!--el primer quote hace referencia a la iteracion de ese elemento, el segundo quote es la propiedad dentro del objeto que esta en quotes-->
+                <span>{{ index +1 }} {{ quote }}</span> <!--accedemos al index y le sumamos 1 para que liste apartir de 1-->
+                <blockquote>-{{ author }}</blockquote>
+            </li>
+        </ul>
+    </div>
+  
     <script src="app.js"></script> <!--importamos el archivo javascript -->
 </body>
 </html>
