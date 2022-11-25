@@ -16,14 +16,17 @@
         <input 
             type="text" 
             v-model="newQuote"
-            v-on:keypress.enter="onAddQuote">
+            v-on:keypress.enter="addQuote">
+
+        <hr>
 
         <ul><!--en el for con las llaves {} desestructuramos el array quotes dentro de las llaves elegimos las propiedades a desestructurar
         para poder listar encerramos la desestructuracion en parentesis () y fuera las llaves agregamos el index-->
             <li v-for="({quote, author}, index) in quotes">
                 <!--el primer quote hace referencia a la iteracion de ese elemento, el segundo quote es la propiedad dentro del objeto que esta en quotes-->
                 <span>{{ index +1 }} {{ quote }}</span> <!--accedemos al index y le sumamos 1 para que liste apartir de 1-->
-                <blockquote>-{{ author }}</blockquote>
+                <!--<blockquote v-if="author">-{{ author }}</blockquote>Directiva v-if si el author existe entonces se muestra-->
+                <blockquote v-show="author">-{{ author }}</blockquote>
             </li>
         </ul>
     </div>
